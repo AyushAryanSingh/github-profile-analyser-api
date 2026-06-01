@@ -2,7 +2,7 @@ const pool = require("../config/db");
 
 async function saveProfile(profile) {
   const query = `
-    INSERT INTO PROFILES(
+    INSERT INTO profiles(
     github_id,
     username,
     name,
