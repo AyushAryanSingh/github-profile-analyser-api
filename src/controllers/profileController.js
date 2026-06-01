@@ -57,6 +57,14 @@ async function analyzeGithubProfile(req, res) {
       data: profile,
     });
   } catch (error) {
+    
+    if (error.response?.status === 404) {
+      return res.status(404).json({
+        success: false,
+        message: "GitHub user not found",
+      });
+    }
+
     return res.status(500).json({
       success: false,
       message: error.message,
@@ -95,4 +103,9 @@ async function searchGithubProfile(req, res) {
   }
 }
 
-module.exports = { getProfiles, getProfile, analyzeGithubProfile,searchGithubProfile};
+module.exports = {
+  getProfiles,
+  getProfile,
+  analyzeGithubProfile,
+  searchGithubProfile,
+};
