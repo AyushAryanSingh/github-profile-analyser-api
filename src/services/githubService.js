@@ -1,5 +1,5 @@
 const axios = require("axios");
-const analyzeRepositories = require("./analysisService");
+const {analyzeRepositories} = require("./analysisService");
 const getUserProfile = async (username) => {
   const { data } = await axios.get(
     `${process.env.GITHUB_API_URL}/users/${username}`,
@@ -32,7 +32,7 @@ async function getUserRepositories(username) {
 async function analyzeProfile(username) {
   const profile = await getUserProfile(username);
   const repo = await getUserRepositories(username);
-  const analysis = analyzeProfile(repo);
+  const analysis = analyzeRepositories(repo);
 
   return {
     ...profile,
@@ -40,4 +40,4 @@ async function analyzeProfile(username) {
   };
 }
 
-module.exports = { getUserProfile, getUserRepositories };
+module.exports = { getUserProfile, getUserRepositories,analyzeProfile };
