@@ -58,6 +58,9 @@ github-profile-analyzer-api/
 ├── database/
 │   └── schema.sql
 │
+│
+├── postman/
+│   └── GitHub-Profile-Analyzer.postman_collection.json
 ├── .env.example
 ├── .gitignore
 ├── package.json
