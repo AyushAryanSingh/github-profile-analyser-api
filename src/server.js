@@ -1,27 +1,9 @@
 require("dotenv").config();
 
-const { analyzeProfile } = require("./services/githubService");
-const { saveProfile } = require("./models/profileModel");
+const app = require("./app");
 
-async function test() {
-  try {
-    console.log("Fetching and analyzing profile...\n");
+const PORT = process.env.PORT || 5000;
 
-    const profile = await analyzeProfile("torvalds");
-
-    console.log("Profile Analysis:");
-    console.log(profile);
-
-    console.log("\nSaving to database...\n");
-
-    const result = await saveProfile(profile);
-
-    console.log("Database Result:");
-    console.log(result);
-  } catch (error) {
-    console.error("Test Failed:");
-    console.error(error.message);
-  }
-}
-
-test();
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

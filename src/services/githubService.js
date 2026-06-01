@@ -1,6 +1,9 @@
 const axios = require("axios");
 const {analyzeRepositories} = require("./analysisService");
-const getUserProfile = async (username) => {
+
+
+async function getUserProfile(username){
+  
   const { data } = await axios.get(
     `${process.env.GITHUB_API_URL}/users/${username}`,
   );

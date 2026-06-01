@@ -36,7 +36,7 @@ async function saveProfile(profile) {
     most_starred_repo=VALUES(most_starred_repo)
     `;
 
-    const values = [
+  const values = [
     profile.githubId,
     profile.username,
     profile.name,
@@ -53,10 +53,47 @@ async function saveProfile(profile) {
     profile.mostStarredRepo,
   ];
 
-  const [result] = await pool.query(query,values);
+  const [result] = await pool.query(query, values);
 
   return result;
+}
+
+async function getAllProfiles() {
+  const query = `
+    SELECT *
+    FROM profiles
+    ORDER BY analyzed_at DESC
+  `;
+
+  const [rows] = await pool.query(query);
+
+  return rows;
+}
+
+async function getProfileByUsername(username) {
+  const query = `
+  SELECT *
+  FROM profiles
+  WHERE username =?
+  `;
+  const [rows] = await pool.query(query,[username]);
+
+  return rows[0];
+}
+
+async function searchProfile(searchString){
+  const query = `
+  SELECT *
+  FROM profiles
+  WHERE username LIKE ?
+  OR name LIKE ?
+  `;
+  const search = `%${searchString}%`;
+  
+  const [rows] = await pool.query(query,[search,search]);
+
+  return rows;
 
 }
 
-module.exports = {saveProfile,}
+module.exports = { saveProfile, getAllProfiles, getProfileByUsername,searchProfile };
