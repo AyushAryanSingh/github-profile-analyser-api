@@ -1,11 +1,15 @@
 const axios = require("axios");
-const {analyzeRepositories} = require("./analysisService");
+const { analyzeRepositories } = require("./analysisService");
 
+const headers = {
+  Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+  Accept: "application/vnd.github+json",
+};
 
-async function getUserProfile(username){
-  
+async function getUserProfile(username) {
   const { data } = await axios.get(
     `${process.env.GITHUB_API_URL}/users/${username}`,
+    { headers }
   );
 
   return {
@@ -22,11 +26,12 @@ async function getUserProfile(username){
     publicRepos: data.public_repos,
     createdAt: data.created_at,
   };
-};
+}
 
 async function getUserRepositories(username) {
   const { data } = await axios.get(
     `${process.env.GITHUB_API_URL}/users/${username}/repos`,
+    { headers }
   );
 
   return data;
@@ -43,4 +48,8 @@ async function analyzeProfile(username) {
   };
 }
 
-module.exports = { getUserProfile, getUserRepositories,analyzeProfile };
+module.exports = {
+  getUserProfile,
+  getUserRepositories,
+  analyzeProfile,
+};
