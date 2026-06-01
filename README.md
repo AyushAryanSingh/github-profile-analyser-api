@@ -2,6 +2,48 @@
 
 A REST API built with Node.js, Express, and MySQL that fetches GitHub user data, analyzes repository statistics, stores profile information in a MySQL database, and provides endpoints for retrieval and search.
 
+## Live API
+
+Base URL:
+
+https://github-profile-analyser-api-1.onrender.com
+
+### Available Endpoints
+
+#### Analyze a GitHub Profile
+
+POST /api/profiles/analyze/:username
+
+Example:
+
+https://github-profile-analyser-api-1.onrender.com/api/profiles/analyze/torvalds
+
+#### Get All Profiles
+
+GET /api/profiles
+
+Example:
+
+https://github-profile-analyser-api-1.onrender.com/api/profiles
+
+#### Get Profile By Username
+
+GET /api/profiles/:username
+
+Example:
+
+https://github-profile-analyser-api-1.onrender.com/api/profiles/torvalds
+
+#### Search Profiles
+
+GET /api/profiles/search?q=keyword
+
+Example:
+
+https://github-profile-analyser-api-1.onrender.com/api/profiles/search?q=tor
+
+
+
 ## Features
 
 * Fetch GitHub user profiles using the GitHub REST API
